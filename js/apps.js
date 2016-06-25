@@ -5,7 +5,6 @@ var Enemy = function(x, y, speed) {
     this.speed = speed;
 };
 
-
 Enemy.prototype.update = function(dt) {
     if (this.x < 505) {
         this.x += 200 * (this.speed * dt);
@@ -19,7 +18,7 @@ Enemy.prototype.render = function() {
 };
 
 var Player = function(x, y, speed) {
-	this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -27,17 +26,15 @@ var Player = function(x, y, speed) {
 
 Player.prototype.update = function(dt) {
     // Check collision
-    for(var i = 0; i < allEnemies.length; i++){
-        if(this.x < allEnemies[i].x + 50 && 
-           this.x + 50 > allEnemies[i].x && 
-           this.y < allEnemies[i].y + 50 &&
-           this.y + 50 > allEnemies[i].y) {
+    for (var i = 0, len = allEnemies.length; i < len; i++) {
+        if (this.x < allEnemies[i].x + 50 && this.x + 50 > allEnemies[i].x &&
+            this.y < allEnemies[i].y + 50 && this.y + 50 > allEnemies[i].y) {
             this.reset();
         }
     }
-    
+
     // reaches the water 
-    if(this.y < 50) {
+    if (this.y < 50) {
         this.reset();
     };
 }
@@ -46,18 +43,18 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function(key){
-    if(key === "left" && this.x > 10)
+Player.prototype.handleInput = function(key) {
+    if (key === "left" && this.x > 10)
         this.x -= 100;
-    if(key === "right" && this.x < 400)
+    if (key === "right" && this.x < 400)
         this.x += 100;
-    if(key === "up" && this.y > 0)
+    if (key === "up" && this.y > 0)
         this.y -= 80;
-    if(key === "down" && this.y < 390)
+    if (key === "down" && this.y < 390)
         this.y += 80;
 }
 
-Player.prototype.reset = function(){
+Player.prototype.reset = function() {
     this.x = 200;
     this.y = 390;
 };
